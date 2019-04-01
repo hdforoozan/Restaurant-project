@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block nav_bar %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">{{ food.name }}</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-5">
+        <img src="{{ food.image.url }}" class="img-fluid" height="300" width="300" />
+      </div>
+      <div class="col-md-5">
+        <p>{{ food.description }}</p>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-md-5">
+        <h3>Price: {{ food.price }}</h3>
+        <p>Contains: {{ food.detail }}</p>
+      </div>
+    </div>
+    <hr>
+  </div> <!-- /container -->
+{% endblock content %}
+
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}

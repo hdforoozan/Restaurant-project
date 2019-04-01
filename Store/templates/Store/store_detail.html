@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block nav_bar %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Branch No. {{ store.branch_num }}</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h4>{{ store.address }}</h4>
+        <br/>
+        <h4>Manager : {{ store.manager }} </h4>
+      </div>
+      <div class="col-md-3">
+        <h3>Foods :</h3>
+        <div class="pl-5">
+        {% for food in foods %}
+            <a href="{% url 'food-detail' food.id %}"><p>{{ food.name }}</p></a>
+        {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-5">
+        <h3>Employess :</h3>
+        <div class="pl-5">
+        {% for emp in employees %}
+            <p>{{ emp.name }}</p>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+    <br/>
+    <hr>
+  </div> <!-- /container -->
+{% endblock content %}
+
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
