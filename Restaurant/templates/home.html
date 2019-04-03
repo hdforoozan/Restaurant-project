@@ -7,7 +7,45 @@
 
 
 {% block content %}
-  {{ block.super }}
+  <main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3"><span style="color:blue">Hello</span>, Welcome</h1>
+      <h3>Welcome to your Restaurant. In this restaurant we want to give to the pleasure of tasting the best foods all around the world. thank you for choosing us.</h3>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <h2>Most Sell Foods</h2>
+    <br>
+    <div class="row">
+    {% for food in most_sell_foods %}
+      <div class="col-md-4">
+        <h2>{{ food.name }}</h2>
+        <img src="{{ food.image.url }}" class="img-fluid" height="200" width="200" />
+        <h3>{{ food.price }} Dollors</h3>
+        <p>{{ food.detail }}</p>
+        <p><a class="btn btn-secondary" href="{% url 'food-detail' food.pk %}" role="button">View details &raquo;</a></p>
+      </div>
+    {% endfor %}
+    </div>
+    <hr>
+    <h2>Newest Foods</h2>
+    <br>
+    <div class="row">
+    {% for food in newest_foods %}
+      <div class="col-md-4">
+        <h2>{{ food.name }}</h2>
+        <img src="{{ food.image.url }}" class="img-fluid" height="200" width="200" />
+        <h3>{{ food.price }} Dollors</h3>
+        <p>{{ food.detail }}</p>
+        <p><a class="btn btn-secondary" href="{% url 'food-detail' food.pk %}" role="button">View details &raquo;</a></p>
+      </div>
+    {% endfor %}
+    </div>
+    <hr>
+  </div> <!-- /container -->
 {% endblock %}
 
 

@@ -6,6 +6,7 @@ class Manager(models.Model):
 	name = models.CharField(max_length=200)
 	address = models.CharField(max_length=300)
 	phone_num = models.CharField(max_length=50)
+	pub_date = models.DateTimeField(auto_now=False)
 
 	def __str__(self):
 		return self.name
@@ -15,6 +16,7 @@ class Store(models.Model):
 	manager = models.OneToOneField(Manager,on_delete=models.CASCADE,null=True)
 	foods = models.ManyToManyField(Food)
 	branch_num = models.PositiveIntegerField()
+	pub_date = models.DateTimeField(auto_now=False)
 	address = models.CharField(max_length=300)
 
 	def __str__(self):
@@ -25,6 +27,7 @@ class Employee(models.Model):
 	name = models.CharField(max_length=200)
 	address = models.CharField(max_length=300)
 	phone_num = models.CharField(max_length=50)
+	pub_date = models.DateTimeField(auto_now=False)
 
 
 
