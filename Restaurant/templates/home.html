@@ -17,6 +17,7 @@
 
   <div class="container">
     <!-- Example row of columns -->
+    {% if most_sell_foods %}
     <h2>Most Sell Foods</h2>
     <br>
     <div class="row">
@@ -30,11 +31,12 @@
       </div>
     {% endfor %}
     </div>
+    {% endif %}
     <hr>
-    <h2>Newest Foods</h2>
+    <h2>Cheapest Foods</h2>
     <br>
     <div class="row">
-    {% for food in newest_foods %}
+    {% for food in cheapest_foods %}
       <div class="col-md-4">
         <h2>{{ food.name }}</h2>
         <img src="{{ food.image.url }}" class="img-fluid" height="200" width="200" />

@@ -18,6 +18,9 @@
       <div class="col-md-4">
         <h4>{{ store.address }}</h4>
         <br/>
+        <img src="{{ store.image.url }}" class="img-fluid" height="440" width="230" />
+        <br/>
+        <br/>
         <h4>Manager : {{ store.manager }} </h4>
       </div>
       <div class="col-md-3">
@@ -37,6 +40,20 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      {% if user.is_staff and user.is_superuser %}
+      <div class="col-md-1">
+        <a href="{% url 'store-update' store.pk %}"><input class="btn btn-primary" type="button" value="Update"></a>
+      </div>
+      <div class="col-md-1">
+        <a href="{% url 'store-delete' store.pk %}"><input class="btn btn-primary" type="button" value="Delete"></a>
+      </div>
+      <div class="col-md-1">
+        <a href="{% url 'manager-detail' store.manager.id %}"><input class="btn btn-primary" type="button" value="Manager Detail &raquo;"></a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
     <br/>
     <hr>
   </div> <!-- /container -->

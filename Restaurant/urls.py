@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('foods/', include('Food.urls')),
     path('stores/', include('Store.urls')),
+    path('account/', include('Account.urls')),
     path('', HomePageView.as_view(), name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

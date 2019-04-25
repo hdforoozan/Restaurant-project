@@ -21,16 +21,24 @@
       <div class="col-md-5">
         <p>{{ food.description }}</p>
       </div>
-    </div>
     <br/>
-    <div class="row">
       <div class="col-md-5">
-        <h3>Price: {{ food.price }}</h3>
+        <h3>Price: {{ food.price }} Dollors</h3>
         <p>Contains: {{ food.detail }}</p>
       </div>
     </div>
-    <hr>
-  </div> <!-- /container -->
+    <div class="row">
+      {% if user.is_staff and user.is_superuser %}
+      <div class="col-md-1">
+      <a href="{% url 'food-update' food.pk %}"><input class="btn btn-primary" type="button" value="Update"></a>
+      </div>
+      <div class="col-md-1">
+      <a href="{% url 'food-delete' food.pk %}"><input class="btn btn-primary" type="button" value="Delete"></a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+    <hr> <!-- /container -->
 {% endblock content %}
 
 

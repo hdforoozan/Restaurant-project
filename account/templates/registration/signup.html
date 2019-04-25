@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block nav_bar %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Sign Up</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <form method="POST" action="{% url 'signup' %}">
+    {% csrf_token %}
+    Username:
+    <br/>
+    <input type="text" name="username">
+    <br/>
+    Email:
+    <br/>
+    <input type="text" name="email">
+    <br/>
+    Password:
+    <br/>
+    <input type="password" name="password1">
+    <br/>
+    Confirm Password:
+    <br/>
+    <input type="password" name="password2">
+    <br/>
+    <br/>
+    <input class="btn btn-primary" type="submit" value="Sign Up">
+  </form>
+  </div>
+
+  <hr>
+{% endblock content %}
+
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
