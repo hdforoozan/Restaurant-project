@@ -1,7 +1,47 @@
 {% extends 'base.html' %}
 
+{% load static %}
 {% block nav_bar %}
-  {{ block.super }}
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'store-list' %}">Stores <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'food-list' %}">Foods</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      {% if user.is_authenticated %}
+        {% if user.is_staff and user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'employee-add' %}"><img src="{% static 'add.png' %}" class="d-inline-block align-top" height="25" width="25" /></a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}" class="d-inline-block align-top"><span style="color: white">Logout</span></a>
+          <form id='logout' method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <input type="hidden" />
+          </form>
+        </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'signup' %}">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'login' %}">Login</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
 {% endblock %}
 
 {% block content %}
@@ -36,6 +76,12 @@
         <div class="pl-5">
         {% for emp in employees %}
             <p>{{ emp.name }}</p>
+            {% if user.is_staff and user.is_superuser %}
+              <div class="col-md-1">
+                <a href="{% url 'employee-detail' emp.pk %}"><input class="btn btn-primary" type="button" value="Detail &raquo;"></a>
+              </div>
+              <br>
+            {% endif %}
         {% endfor %}
         </div>
       </div>

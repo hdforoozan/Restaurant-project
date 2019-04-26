@@ -2,7 +2,9 @@ from django.urls import path
 from .views import (StoreListView, StoreDetailView,StoreUpdateView,
 					StoreDeleteView,StoreCreateView,
 					ManagerDetailView,ManagerUpdateView,
-					ManagerDeleteView
+					ManagerDeleteView,
+					EmployeeDetailView,EmployeeCreateView,EmployeeUpdateView,
+					EmployeeDeleteView
 					)
 
 
@@ -15,6 +17,10 @@ urlpatterns = [
 	path('manager/<int:pk>', ManagerDetailView.as_view(), name='manager-detail'),
 	path('manager/<int:pk>/update/', ManagerUpdateView.as_view(), name='manager-update'),
 	path('manager/<int:pk>/delete/', ManagerDeleteView.as_view(), name='manager-delete'),
+	path('employee/<int:pk>/', EmployeeDetailView.as_view(), name='employee-detail'),
+	path('employee/<int:pk>/update/', EmployeeUpdateView.as_view(), name='employee-update'),
+	path('employee/<int:pk>/delete/', EmployeeDeleteView.as_view(), name='employee-delete'),
+	path('employee/add/', EmployeeCreateView.as_view(), name='employee-add'),
 
 
 ]

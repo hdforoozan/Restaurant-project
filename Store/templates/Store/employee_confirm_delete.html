@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block nav_bar %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Delete {{ employee.name }}</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <form method="POST" action="{% url 'employee-delete' employee.pk %}">
+    {% csrf_token %}
+    <h2>Are you sure you want to delete {{ employee.name }} ?</h2>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Delete">
+  </form>
+  </div>
+
+  <hr>
+{% endblock content %}
+
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}

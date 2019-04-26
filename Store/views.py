@@ -33,6 +33,9 @@ class StoreDetailView(LoginRequiredMixin, DetailView):
 	    context = super().get_context_data(**kwargs)
 	    context['foods'] = Food.objects.filter(store__id=self.kwargs['pk'])
 	    context['employees'] = Employee.objects.filter(store__id=self.kwargs['pk'])
+	    u = Employee.objects.filter(store__id=self.kwargs['pk'])
+	    for i in u:
+	    	print(i.pk)
 	    return context
 
 
@@ -80,3 +83,27 @@ class ManagerDeleteView(LoginRequiredMixin, DeleteView):
 ##############################################################
 # Employee Model Views
 ###############################################################
+
+
+
+class EmployeeDetailView(LoginRequiredMixin, DetailView):
+	model = Employee
+	context_object_name = 'employee'
+
+
+class EmployeeCreateView(LoginRequiredMixin, CreateView):
+	model = Employee
+	fields = ['store','name','address','phone_num','pub_date']
+
+
+class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
+	model = Employee
+	fields = ['name','address','phone_num']
+	context_object_name = 'employee'
+	template_name = 'Store/employee_update_form.html'
+
+
+class EmployeeDeleteView(LoginRequiredMixin, DeleteView):
+	model = Employee
+	success_url = reverse_lazy('store-detail')
+	context_object_name = 'employee'

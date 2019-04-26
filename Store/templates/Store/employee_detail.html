@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block nav_bar %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">{{ employee.name }}</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Address : {{ employee.address }}</h4>
+        <br/>
+      </div>
+      <div class="col-md-4">
+        <h4>Created : {{ employee.pub_date }}</h4>
+        <br/>
+      </div>
+      <div class="col-md-4">
+        <h4>Phone Number : {{ employee.phone_num }}</h4>
+        <br/>
+      </div>
+    </div>
+    {% if user.is_staff and user.is_superuser %}
+    <div class="row">
+      <div class="col-md-1">
+        <a href="{% url 'employee-update' employee.pk %}"><input class="btn btn-primary" type="button" value="Update"></a>
+      </div>
+      <div class="col-md-1">
+        <a href="{% url 'employee-delete' employee.pk %}"><input class="btn btn-primary" type="button" value="Delete"></a>
+      </div>
+    </div>
+    {% endif %}
+  </div> <!-- /container -->
+  <hr>
+{% endblock content %}
+
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
+
