@@ -21,7 +21,7 @@ class Store(models.Model):
 	manager = models.OneToOneField(Manager,on_delete=models.CASCADE,null=True)
 	foods = models.ManyToManyField(Food)
 	branch_num = models.PositiveIntegerField()
-	image = models.ImageField(upload_to='images/', null=True)
+	image = models.ImageField(upload_to='images/', null=True, blank=True)
 	pub_date = models.DateTimeField(auto_now=False)
 	address = models.CharField(max_length=300)
 

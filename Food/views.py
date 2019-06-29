@@ -16,7 +16,7 @@ class FoodDetailView(LoginRequiredMixin, DetailView):
 
 class FoodCreateView(LoginRequiredMixin, CreateView):
 	model = Food
-	fields = ['user','name','description','image','pub_date','price','detail']
+	fields = ['user','name','description','pub_date','image','price','detail']
 
 
 class FoodUpdateView(LoginRequiredMixin, UpdateView):

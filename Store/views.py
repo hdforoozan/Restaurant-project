@@ -34,8 +34,6 @@ class StoreDetailView(LoginRequiredMixin, DetailView):
 	    context['foods'] = Food.objects.filter(store__id=self.kwargs['pk'])
 	    context['employees'] = Employee.objects.filter(store__id=self.kwargs['pk'])
 	    u = Employee.objects.filter(store__id=self.kwargs['pk'])
-	    for i in u:
-	    	print(i.pk)
 	    return context
 
 
