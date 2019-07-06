@@ -33,7 +33,6 @@ class StoreDetailView(LoginRequiredMixin, DetailView):
 	    context = super().get_context_data(**kwargs)
 	    context['foods'] = Food.objects.filter(store__id=self.kwargs['pk'])
 	    context['employees'] = Employee.objects.filter(store__id=self.kwargs['pk'])
-	    u = Employee.objects.filter(store__id=self.kwargs['pk'])
 	    return context
 
 

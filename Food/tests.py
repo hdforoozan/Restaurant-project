@@ -83,6 +83,9 @@ class FoodTestCase(TestCase):
 		self.assertEqual(self.food.get_absolute_url(), reverse('food-detail', args='1'))
 
 
+		
+
+
 
 
 
