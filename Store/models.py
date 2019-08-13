@@ -32,7 +32,7 @@ class Store(models.Model):
 		return reverse('store-detail', args=[str(self.id)])
 
 class Employee(models.Model):
-	store = models.ForeignKey(Store,on_delete=models.CASCADE)
+	store = models.ForeignKey(Store, related_name='employees', on_delete=models.CASCADE)
 	name = models.CharField(max_length=200)
 	address = models.CharField(max_length=300)
 	phone_num = models.CharField(max_length=50)

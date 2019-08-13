@@ -31,18 +31,52 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Local apps
     'Account.apps.AccountConfig',
     'Food.apps.FoodConfig',
     'Store.apps.StoreConfig',
+    'api.apps.ApiConfig',
+
+    #Default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    #3rd party apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'django_filters',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+    'corsheaders',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication', 
+    ],
+}
+
+
+CORS_ORIGIN_WHITELIST = (
+'localhost:3000'
+)
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', 
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -138,4 +172,9 @@ MEDIA_URL = '/media/'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'home'
+
+# email setting
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+SITE_ID = 1
 
