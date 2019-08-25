@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+
 {% block nav_bar %}
   {{ block.super }}
 {% endblock %}
@@ -8,16 +8,12 @@
 <main role="main">
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">Add Store</h1>
+      <h1 class="display-3">Welcome {{ user.username }} !</h1>
     </div>
   </div>
 
   <div class="container">
-    <form method="POST" action="{% url 'store-add' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input class="btn btn-primary" type="submit" value="Save">
-  </form>
+    <h3>Your account has been successfully created.Now you can <a href="{% url "login" %}">log in</a>.</h3>
   </div>
 
   <hr>

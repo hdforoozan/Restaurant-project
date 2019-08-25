@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block nav_bar %}
   {{ block.super }}
 {% endblock %}
@@ -16,16 +16,21 @@
     <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-5">
-        <img src="{{ food.image.url }}" class="img-fluid" height="200" width="200" />
+        <img src="{{ food.image.url }}" height="250" width="250" />
       </div>
       <div class="col-md-5">
         <p>{{ food.description }}</p>
       </div>
-    <br/>
+      <br/>
       <div class="col-md-5">
         <h3>Price: {{ food.price }} Dollors</h3>
         <p>Contains: {{ food.detail }}</p>
       </div>
+      <!-- <div class="col-md-5">
+        {% with total_likes=food.users_like.count users_like=food.users_like.all %}
+        <p>{{ total_likes }} Likes</p>
+        {% endwith %}
+      </div> -->
     </div>
     <div class="row">
       {% if user.is_staff and user.is_superuser %}

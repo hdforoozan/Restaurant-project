@@ -1,47 +1,9 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% block nav_bar %}
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="{% url 'home' %}">Home</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'store-list' %}">Stores <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="{% url 'food-list' %}">Foods</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      {% if user.is_authenticated %}
-        {% if user.is_staff and user.is_superuser %}
-        <li class="nav-item">
-          <a class="nav-link active" href="{% url 'employee-add' %}"><img src="{% static 'add.png' %}" class="d-inline-block align-top" height="25" width="25" /></a>
-        </li>
-        {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}" class="d-inline-block align-top"><span style="color: white">Logout</span></a>
-          <form id='logout' method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <input type="hidden" />
-          </form>
-        </li>
-      {% else %}
-      <li class="nav-item">
-        <a class="nav-link active" href="{% url 'signup' %}">Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="{% url 'login' %}">Login</a>
-      </li>
-      {% endif %}
-    </ul>
-  </div>
-</nav>
+{% block nav_bar %}
+  {{ block.super }}
 {% endblock %}
 
 {% block content %}
@@ -58,26 +20,25 @@
       <div class="col-md-4">
         <h4>{{ store.address }}</h4>
         <br/>
-        <img src="{{ store.image.url }}" class="img-fluid" height="300" width="300" />
+        <img src="{{ store.image.url }}" height="250" width="250" />
         <br/>
         <br/>
         <h4>Manager : {{ store.manager }} </h4>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6">
         <h3>Foods :</h3>
         <div class="pl-5">
         {% for food in foods %}
             <a href="{% url 'food-detail' food.id %}"><p>{{ food.name }}</p></a>
         {% endfor %}
-        </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-6">
         <h3>Employess :</h3>
-        <div class="pl-5">
+        <div class="pl-4">
         {% for emp in employees %}
             <p>{{ emp.name }}</p>
             {% if user.is_staff and user.is_superuser %}
-              <div class="col-md-1">
+              <div class="col-md-2">
                 <a href="{% url 'employee-detail' emp.pk %}"><input class="btn btn-primary" type="button" value="Detail &raquo;"></a>
               </div>
               <br>
@@ -88,13 +49,13 @@
     </div>
     <div class="row">
       {% if user.is_staff and user.is_superuser %}
-      <div class="col-md-1">
+      <div class="col-md-3">
         <a href="{% url 'store-update' store.pk %}"><input class="btn btn-primary" type="button" value="Update"></a>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-3">
         <a href="{% url 'store-delete' store.pk %}"><input class="btn btn-primary" type="button" value="Delete"></a>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-3">
         <a href="{% url 'manager-detail' store.manager.id %}"><input class="btn btn-primary" type="button" value="Manager Detail &raquo;"></a>
       </div>
       {% endif %}
@@ -102,9 +63,7 @@
   </div>
     <br/>
     <hr>
-  </div> <!-- /container -->
 {% endblock content %}
-
 
 {% block footer %}
     {{ block.super }}

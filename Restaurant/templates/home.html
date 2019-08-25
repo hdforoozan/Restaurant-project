@@ -24,7 +24,7 @@
     {% for food in most_sell_foods %}
       <div class="col-md-4">
         <h2>{{ food.name }}</h2>
-        <img src="{{ food.image.url }}" class="img-fluid" height="200" width="200" />
+        <img src="{{ food.image.url }}"  height="250" width="250" />
         <h3>{{ food.price }} Dollors</h3>
         <p>{{ food.detail }}</p>
         <p><a class="btn btn-secondary" href="{% url 'food-detail' food.pk %}" role="button">View details &raquo;</a></p>
@@ -39,7 +39,7 @@
     {% for food in cheapest_foods %}
       <div class="col-md-4">
         <h2>{{ food.name }}</h2>
-        <img src="{{ food.image.url }}" class="img-fluid" height="200" width="200" />
+        <img src="{{ food.image.url }}" height="250" width="250"/>
         <h3>{{ food.price }} Dollors</h3>
         <p>{{ food.detail }}</p>
         <p><a class="btn btn-secondary" href="{% url 'food-detail' food.pk %}" role="button">View details &raquo;</a></p>

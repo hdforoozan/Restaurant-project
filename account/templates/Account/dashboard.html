@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block nav_bar %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Your Profile</h1>
+      {% if messages %}
+  			<ul class="messages">
+  				{% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    					<li class="{{ message.tags }}">
+    					     {{ message|safe }}
+    					     <a href="{% url 'dashboard' %}" class="close">x</a>
+    					</li>
+            {% endif %}
+  				{% endfor %}
+  			</ul>
+		  {% endif %}
+    </div>
+  </div>
+
+  <div class="container">
+    <h3>Username : {{ username }}</h3>
+    <h3>Email : {{ email }}</h3>
+    <h3>Date of Birth : {{ profile.date_of_birth }}</h3>
+    <img src="{{ profile.photo.url }}"  height="250" width="250"/>
+    <br>
+    <br>
+    <a class="btn btn-primary" href="{% url 'edit' %}">Edit Profile</a>
+  </div>
+
+  <hr>
+{% endblock content %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}

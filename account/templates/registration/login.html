@@ -24,10 +24,13 @@
     <input type="password" name="password">
     <br/>
     <br>
+    <input type="hidden" name="next" value="{{ next }}">
     <input class="btn btn-primary" type="submit" value="Login">
   </form>
-  </div>
+  <br>
   <p><a href="{% url "password_reset" %}">Forgotten your password ?</a></p>
+  </div>
+
 
   <hr>
 {% endblock content %}
