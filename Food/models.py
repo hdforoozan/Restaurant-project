@@ -10,7 +10,7 @@ class Food(models.Model):
 	description = models.TextField(null=True)
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
 	pub_date = models.DateTimeField(auto_now=False)
-	price = models.PositiveIntegerField()
+	price = models.DecimalField(max_digits=10, decimal_places=2)
 	detail = models.CharField(max_length=400)
 	users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
 							related_name='foods_liked',blank=True)

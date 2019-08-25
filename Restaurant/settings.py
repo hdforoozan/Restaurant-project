@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'Food.apps.FoodConfig',
     'Store.apps.StoreConfig',
     'api.apps.ApiConfig',
+    'Cart.apps.CartConfig',
 
     #Default apps
     'django.contrib.admin',
@@ -178,3 +179,8 @@ LOGIN_REDIRECT_URL = 'home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
+
+
+# Session settings
+
+CART_SESSION_ID = 'cart'

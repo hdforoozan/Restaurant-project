@@ -41,6 +41,13 @@
       <a href="{% url 'food-delete' food.pk %}"><input class="btn btn-primary" type="button" value="Delete"></a>
       </div>
       {% endif %}
+      <div class="col-md-4">
+        <form action="{% url "cart_add" food.pk %}" method="post">
+      		{{ cart_food_form }}
+      		{% csrf_token %}
+      		<input class="btn btn-primary" type="submit" value="Add to cart">
+      	</form>
+      </div>
     </div>
   </div>
     <hr> <!-- /container -->

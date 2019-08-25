@@ -51,11 +51,14 @@
     </ul>
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
+      <!-- <li class="nav-item">
+        <a class="nav-link active" href="#">ping Cart</a>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link active" href="{% url 'dashboard' %}">Dashboard</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="javascript:{document.getElementById('logout').submit()}"><span style="color: white">logout</span></a>
+        <a class="nav-link active" href="javascript:{document.getElementById('logout').submit()}"><span style="color: white">Logout</span></a>
         <form id='logout' method="POST" action="{% url 'logout' %}">
           {% csrf_token %}
           <input type="hidden" />

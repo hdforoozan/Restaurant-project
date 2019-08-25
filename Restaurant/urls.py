@@ -25,6 +25,7 @@ urlpatterns = [
     path('foods/', include('Food.urls')),
     path('stores/', include('Store.urls')),
     path('account/', include('Account.urls')),
+    path('cart/', include('Cart.urls')),
     path('', HomePageView.as_view(), name='home'),
     path('api/v1/', include('api.urls')),
     path('api-auth/', include('rest_framework.urls')),

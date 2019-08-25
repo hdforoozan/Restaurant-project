@@ -3,6 +3,7 @@ from django.views.generic import TemplateView,DetailView,ListView, CreateView,De
 from .models import Food
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from Cart.forms import CartAddFoodForm
 
 class FoodListView(LoginRequiredMixin, ListView):
 	model = Food
@@ -12,6 +13,11 @@ class FoodListView(LoginRequiredMixin, ListView):
 class FoodDetailView(LoginRequiredMixin, DetailView):
 	model = Food
 	context_object_name = 'food'
+
+	def get_context_data(self, **kwargs):
+	    context = super().get_context_data(**kwargs)
+	    context['cart_food_form'] = CartAddFoodForm()
+	    return context
 
 
 class FoodCreateView(LoginRequiredMixin, CreateView):
@@ -29,10 +35,3 @@ class FoodDeleteView(LoginRequiredMixin, DeleteView):
 	model = Food
 	success_url = reverse_lazy('food-list')
 	context_object_name = 'food'
-
-
-
-
-
-
-
