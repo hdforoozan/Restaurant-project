@@ -5,6 +5,7 @@ import datetime
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView,DetailView,ListView, CreateView,DeleteView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from Cart.forms import CartAddFoodForm
 
 class HomePageView(TemplateView):
 	template_name = 'home.html'
@@ -31,7 +32,7 @@ class StoreDetailView(LoginRequiredMixin, DetailView):
 
 	def get_context_data(self, **kwargs):
 	    context = super().get_context_data(**kwargs)
-	    context['foods'] = Food.objects.filter(store__id=self.kwargs['pk'])
+	    context['foods'] = Food.objects.filter(store__id=self.kwargs['pk']).filter(run_out=False)
 	    context['employees'] = Employee.objects.filter(store__id=self.kwargs['pk'])
 	    return context
 
@@ -52,6 +53,18 @@ class StoreDeleteView(LoginRequiredMixin, DeleteView):
 	model = Store
 	success_url = reverse_lazy('store-list')
 	context_object_name = 'store'
+
+
+class StoreFoodDetailView(LoginRequiredMixin, DetailView):
+	model = Store
+	context_object_name = 'store'
+	template_name = 'Store/store_food_detail.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['food'] = Food.objects.filter(store__id=self.kwargs['pk']).get(id=self.kwargs['food_id'])
+		context['cart_food_form'] = CartAddFoodForm()
+		return context
 
 ##############################################################
 # Manager Model Views

@@ -2,31 +2,41 @@
 
 {% load static %}
 
+{% block title %}
+  <title>Foods List</title>
+{% endblock title %}
+
 {% block nav_bar %}
-{{ block.super }}
+    {{ block.super }}
 {% endblock %}
 
 {% block content %}
 <main role="main">
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">Foods List</h1>
+      {% if user.is_staff and user.is_superuser %}
+        <h1 class="display-3">Foods List</h1>
+      {% else %}
+        <h1 class="display-3">Page Not Found</h1>
+      {% endif %}
     </div>
   </div>
 
   <div class="container">
     <!-- Example row of columns -->
-    <div class="row">
-      {% for food in foods %}
-      <div class="col-md-4">
-        <h2>{{ food.name }}</h2>
-        <img src="{{ food.image.url }}" height="250" width="250" />
-        <h3>{{ food.price }} Dollors</h3>
-        <p>{{ food.detail }}</p>
-        <p><a class="btn btn-secondary" href="{% url 'food-detail' food.pk %}" role="button">View details &raquo;</a></p>
+    {% if user.is_staff and user.is_superuser %}
+      <div class="row">
+        {% for food in foods %}
+        <div class="col-md-4">
+          <h2>{{ food.name }}</h2>
+          <img src="{{ food.image.url }}" height="250" width="250" />
+          <h3>{{ food.price }} Dollors</h3>
+          <p>{{ food.detail }}</p>
+          <p><a class="btn btn-secondary" href="{% url 'food-detail' food.pk %}" role="button">View details &raquo;</a></p>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
+    {% endif %}
     <hr>
   </div> <!-- /container -->
   {% endblock content %}

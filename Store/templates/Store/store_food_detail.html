@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block title %}
@@ -13,17 +14,12 @@
 <main role="main">
   <div class="jumbotron">
     <div class="container">
-      {% if user.is_staff and user.is_superuser %}
         <h1 class="display-3">{{ food.name }}</h1>
-      {% else %}
-        <h1 class="display-3">Page Not Found</h1>
-      {% endif %}
     </div>
   </div>
 
   <div class="container">
     <!-- Example row of columns -->
-    {% if user.is_staff and user.is_superuser %}
     <div class="row">
       <div class="col-md-5">
         <img src="{{ food.image.url }}" height="250" width="250" />
@@ -36,23 +32,19 @@
         <h3>Price: {{ food.price }} Dollors</h3>
         <p>Contains: {{ food.detail }}</p>
       </div>
-      <!-- <div class="col-md-5">
-        {% with total_likes=food.users_like.count users_like=food.users_like.all %}
-        <p>{{ total_likes }} Likes</p>
-        {% endwith %}
-      </div> -->
     </div>
+
     <div class="row">
-      <div class="col-md-1">
-        <a href="{% url 'food-update' food.pk %}"><input class="btn btn-primary" type="button" value="Update"></a>
-      </div>
-      <div class="col-md-1">
-        <a href="{% url 'food-delete' food.pk %}"><input class="btn btn-primary" type="button" value="Delete"></a>
+      <div class="col-md-4">
+        <form action="{% url "cart_add" food_id=food.pk store_id=store.id %}" method="post">
+      		{{ cart_food_form }}
+      		{% csrf_token %}
+      		<input class="btn btn-primary" type="submit" value="Add to cart">
+      	</form>
       </div>
     </div>
-    {% endif %}
   </div>
-    <hr> <!-- /container -->
+    <hr>
 {% endblock content %}
 
 

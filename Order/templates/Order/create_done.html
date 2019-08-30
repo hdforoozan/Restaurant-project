@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block title %}
-  <title>Add Store</title>
+  <title>Complete Order</title>
 {% endblock title %}
 
 {% block nav_bar %}
@@ -13,19 +14,14 @@
 <main role="main">
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">Add Store</h1>
+        <h1 class="display-3">Thank you</h1>
     </div>
   </div>
 
   <div class="container">
-    <form method="POST" action="{% url 'store-add' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input class="btn btn-primary" type="submit" value="Save">
-  </form>
+  	<p>Your order has been successfully completed. Your order number is <strong>{{ order.id }}</strong>.</p>
   </div>
-
-  <hr>
+    <hr>
 {% endblock content %}
 
 

@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% load static %}
+
+{% block title %}
+  <title>Manager Detail</title>
+{% endblock title %}
+
 {% block nav_bar %}
   {{ block.super }}
 {% endblock %}
@@ -47,4 +52,3 @@
 {% block footer %}
     {{ block.super }}
 {% endblock %}
-

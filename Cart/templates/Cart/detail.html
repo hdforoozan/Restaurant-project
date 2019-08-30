@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+  <title>Shopping Cart</title>
+{% endblock title %}
+
 {% block nav_bar %}
   {{ block.super }}
 {% endblock %}
@@ -49,7 +53,7 @@
 					</td>
 					<td>{{ food.name }}</td>
 					<td>
-						<form action="{% url "cart_add" food.id %}" method="post">
+						<form action="{% url "cart_add" food_id=food.id store_id=item.store_id %}" method="post">
 							{{ item.update_quantity_form.quantity }}
 							{{ item.update_quantity_form.update }}
 							<input class="btn btn-secondary" type="submit" value="Update">
@@ -71,8 +75,8 @@
 </table>
 <br>
   <p class="text-center">
-		<a href="{% url 'food-list' %}" class="btn btn-primary">Continue shopping</a>
-		<a href="#" class="btn btn-primary">Checkout</a>
+		<a href="{% url 'store-detail' pk=store_id %}" class="btn btn-primary">Continue shopping</a>
+		<a href="{% url 'order_create' %}" class="btn btn-primary">Checkout</a>
 	</p>
 <hr>
 {% endblock %}

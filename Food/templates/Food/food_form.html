@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}
+  <title>Add Food</title>
+{% endblock title %}
+
 {% block nav_bar %}
   {{ block.super }}
 {% endblock %}
@@ -8,16 +13,22 @@
 <main role="main">
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">Add Food</h1>
+      {% if user.is_staff and user.is_superuser %}
+        <h1 class="display-3">Add Food</h1>
+      {% else %}
+        <h1 class="display-3">Page Not Found</h1>
+      {% endif %}
     </div>
   </div>
 
   <div class="container">
+    {% if user.is_staff and user.is_superuser %}
     <form method="POST" action="{% url 'food-add' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <input class="btn btn-primary" type="submit" value="Save">
-  </form>
+    </form>
+    {% endif %}
   </div>
 
   <hr>

@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Hadi's Restaurant</title>
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -31,6 +30,9 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
+    {% block title %}
+      <title>Home</title>
+    {% endblock title %}
   </head>
   <body>
   {% block nav_bar %}
@@ -43,17 +45,19 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'store-list' %}">Stores <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'store-list' %}">Stores<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="{% url 'food-list' %}">Foods</a>
+      {% if user.is_staff and user.is_superuser %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'food-list' %}">Foods<span class="sr-only">(current)</span></a>
       </li>
+      {% endif %}
     </ul>
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
-      <!-- <li class="nav-item">
-        <a class="nav-link active" href="#">ping Cart</a>
-      </li> -->
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'cart_detail' %}">Shopping Cart</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link active" href="{% url 'dashboard' %}">Dashboard</a>
       </li>

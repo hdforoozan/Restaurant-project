@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'Store.apps.StoreConfig',
     'api.apps.ApiConfig',
     'Cart.apps.CartConfig',
+    'Order.apps.OrderConfig',
 
     #Default apps
     'django.contrib.admin',

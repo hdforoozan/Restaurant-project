@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+  <title>Branch No.{{ store.branch_num }}</title>
+{% endblock title %}
+
 {% block nav_bar %}
   {{ block.super }}
 {% endblock %}
@@ -25,14 +29,7 @@
         <br/>
         <h4>Manager : {{ store.manager }} </h4>
       </div>
-      <div class="col-md-6">
-        <h3>Foods :</h3>
-        <div class="pl-5">
-        {% for food in foods %}
-            <a href="{% url 'food-detail' food.id %}"><p>{{ food.name }}</p></a>
-        {% endfor %}
-      </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <h3>Employess :</h3>
         <div class="pl-4">
         {% for emp in employees %}
@@ -46,19 +43,33 @@
         {% endfor %}
         </div>
       </div>
-    </div>
-    <div class="row">
       {% if user.is_staff and user.is_superuser %}
-      <div class="col-md-3">
+      <div class="col-md-1">
         <a href="{% url 'store-update' store.pk %}"><input class="btn btn-primary" type="button" value="Update"></a>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-1">
         <a href="{% url 'store-delete' store.pk %}"><input class="btn btn-primary" type="button" value="Delete"></a>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-1">
         <a href="{% url 'manager-detail' store.manager.id %}"><input class="btn btn-primary" type="button" value="Manager Detail &raquo;"></a>
       </div>
       {% endif %}
+    </div>
+    <br>
+    <div class="row">
+      <h1>Foods</h1>
+    </div>
+    <br>
+    <div class="row">
+      {% for food in foods %}
+      <div class="col-md-4">
+        <h2>{{ food.name }}</h2>
+        <img src="{{ food.image.url }}" height="250" width="250" />
+        <h3>{{ food.price }} Dollors</h3>
+        <p>{{ food.detail }}</p>
+        <p><a class="btn btn-secondary" href="{% url 'store-food-detail' pk=store.id food_id=food.id %}" role="button">View details &raquo;</a></p>
+      </div>
+      {% endfor %}
     </div>
   </div>
     <br/>

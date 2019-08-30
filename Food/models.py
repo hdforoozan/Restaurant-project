@@ -14,6 +14,7 @@ class Food(models.Model):
 	detail = models.CharField(max_length=400)
 	users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
 							related_name='foods_liked',blank=True)
+	run_out = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.name
