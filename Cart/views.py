@@ -5,6 +5,7 @@ from Food.models import Food
 from Store.models import Store
 from .forms import CartAddFoodForm
 from .cart import Cart
+from Coupon.forms import CouponForm
 
 @require_POST
 @login_required
@@ -29,8 +30,10 @@ def cart_remove(request, food_id):
 def cart_detail(request):
     cart = Cart(request)
     store_id = cart.get_store_id()
+    coupon_form = CouponForm()
     for item in cart:
         item['update_quantity_form'] = CartAddFoodForm(
         initial={'quantity': item['quantity'], 'update': True}
         )
-    return render(request, 'Cart/detail.html', {'cart':cart, 'store_id':store_id})
+    return render(request, 'Cart/detail.html', {'cart':cart, 'store_id':store_id,
+                                                'coupon_form':coupon_form})

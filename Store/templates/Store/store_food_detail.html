@@ -29,7 +29,7 @@
       </div>
       <br/>
       <div class="col-md-5">
-        <h3>Price: {{ food.price }} Dollors</h3>
+        <h3>Price: ${{ food.price }}</h3>
         <p>Contains: {{ food.detail }}</p>
       </div>
     </div>
@@ -39,7 +39,7 @@
         <form action="{% url "cart_add" food_id=food.pk store_id=store.id %}" method="post">
       		{{ cart_food_form }}
       		{% csrf_token %}
-      		<input class="btn btn-primary" type="submit" value="Add to cart">
+      		<input class="btn btn-success" type="submit" value="Add to cart">
       	</form>
       </div>
     </div>

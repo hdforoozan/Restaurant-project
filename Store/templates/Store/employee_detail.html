@@ -21,6 +21,18 @@
   <div class="container">
     <!-- Example row of columns -->
     <div class="row">
+      <div class="col-md-5">
+        <h4>Education Degree : {{ employee.education_degree }}</h4>
+      </div>
+      <div class="col-md-4">
+        <h4>Position : {{ employee.position }}</h4>
+      </div>
+      <div class="col-md-3">
+        <h4>Salary : {{ employee.monthly_salary }}</h4>
+      </div>
+    </div>
+    <br>
+    <div class="row">
       <div class="col-md-4">
         <h4>Address : {{ employee.address }}</h4>
         <br/>
@@ -34,13 +46,16 @@
         <br/>
       </div>
     </div>
-    {% if user.is_staff and user.is_superuser %}
     <div class="row">
+      <div class="col-md-4">
+        <img src="{{ employee.image.url }}" height="300" width="300">
+      </div>
+    {% if user.is_staff and user.is_superuser %}
       <div class="col-md-1">
         <a href="{% url 'employee-update' employee.pk %}"><input class="btn btn-primary" type="button" value="Update"></a>
       </div>
       <div class="col-md-1">
-        <a href="{% url 'employee-delete' employee.pk %}"><input class="btn btn-primary" type="button" value="Delete"></a>
+        <a href="{% url 'employee-delete' employee.pk %}"><input class="btn btn-danger" type="button" value="Delete"></a>
       </div>
     </div>
     {% endif %}

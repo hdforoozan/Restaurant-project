@@ -13,7 +13,7 @@
 <main role="main">
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">Delete {{ employee.name }}</h1>
+      <h1 class="display-3">Delete {{ employee.name }} ?</h1>
     </div>
   </div>
 
@@ -22,7 +22,7 @@
     {% csrf_token %}
     <h2>Are you sure you want to delete {{ employee.name }} ?</h2>
     <br>
-    <input class="btn btn-primary" type="submit" value="Delete">
+    <input class="btn btn-danger" type="submit" value="Delete">
   </form>
   </div>
 

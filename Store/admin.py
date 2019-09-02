@@ -3,9 +3,9 @@ from .models import Store, Manager, Employee
 
 @admin.register(Manager)
 class ManagerAdmin(admin.ModelAdmin):
-	list_display = ['name','address','pub_date']
-	list_editable = ['address']
-	search_field = ['naem','phone_num']
+	list_display = ['name','address','monthly_salary','education_degree','pub_date']
+	list_editable = ['address','monthly_salary']
+	search_field = ['name','phone_num']
 
 class EmployeeInline(admin.TabularInline):
 	model = Employee

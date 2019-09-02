@@ -26,18 +26,24 @@
 			    <span>${{ item.total_price }}</span>
 		    </li>
 		  {% endfor %}
+      {% if cart.coupon %}
+    		<li>
+    			"{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+    			<span>- ${{ cart.get_discount|floatformat:"2" }}</span>
+    		</li>
+  		{% endif %}
 	   </ul>
     </div>
 
     <div class="row">
-      <h4>Total: ${{ cart.get_total_price }}</h4>
+      <h4>Total: ${{ cart.get_total_price_after_discount|floatformat:"2" }}</h4>
     </div>
 
     <div class="row">
         <form action="." method="post" class="order-form">
           {% csrf_token %}
         	{{ form.as_p }}
-        	<p><input class="btn btn-primary" type="submit" value="Order"></p>
+        	<p><input class="btn btn-success" type="submit" value="Order"></p>
         </form>
     </div>
   </div>

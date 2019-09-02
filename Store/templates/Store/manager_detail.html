@@ -34,13 +34,19 @@
         <br/>
       </div>
     </div>
-    {% if user.is_staff and user.is_superuser %}
     <div class="row">
+      <div class="col-md-4">
+        <img src="{{ manager.image.url }}" height="300" width="300">
+      </div>
+      {% if user.is_staff and user.is_superuser %}
+      <div class="col-md-4">
+        <h4>Education Degree : {{ manager.education_degree }}</h4>
+      </div>
       <div class="col-md-1">
         <a href="{% url 'manager-update' manager.pk %}"><input class="btn btn-primary" type="button" value="Update"></a>
       </div>
       <div class="col-md-1">
-        <a href="{% url 'manager-delete' manager.pk %}"><input class="btn btn-primary" type="button" value="Delete"></a>
+        <a href="{% url 'manager-delete' manager.pk %}"><input class="btn btn-danger" type="button" value="Delete"></a>
       </div>
     </div>
     {% endif %}

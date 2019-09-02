@@ -30,9 +30,9 @@
         <div class="col-md-4">
           <h2>{{ food.name }}</h2>
           <img src="{{ food.image.url }}" height="250" width="250" />
-          <h3>{{ food.price }} Dollors</h3>
+          <h3>${{ food.price }}</h3>
           <p>{{ food.detail }}</p>
-          <p><a class="btn btn-secondary" href="{% url 'food-detail' food.pk %}" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-info" href="{% url 'food-detail' food.pk %}" role="button">View details &raquo;</a></p>
         </div>
         {% endfor %}
       </div>

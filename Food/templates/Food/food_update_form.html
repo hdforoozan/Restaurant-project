@@ -26,7 +26,7 @@
     <form method="POST" action="{% url 'food-update' food.pk %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <input class="btn btn-primary" type="submit" value="Save">
+    <input class="btn btn-success" type="submit" value="Save">
     </form>
     {% endif %}
   </div>
