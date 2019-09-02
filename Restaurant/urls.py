@@ -27,6 +27,7 @@ urlpatterns = [
     path('account/', include('Account.urls')),
     path('cart/', include('Cart.urls')),
     path('coupons/', include('Coupon.urls')),
+    path('comments/', include('Comment.urls')),
     path('orders/', include('Order.urls')),
     path('', HomePageView.as_view(), name='home'),
     path('api/v1/', include('api.urls')),

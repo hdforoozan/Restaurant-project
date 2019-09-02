@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'Store.apps.StoreConfig',
     'api.apps.ApiConfig',
     'Cart.apps.CartConfig',
+    'Comment.apps.CommentConfig',
     'Coupon.apps.CouponConfig',
     'Order.apps.OrderConfig',
 
@@ -149,7 +150,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Iran'
 
 USE_I18N = True
 

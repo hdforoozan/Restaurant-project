@@ -1,12 +1,14 @@
+import datetime
 from django.shortcuts import render
 from .models import Store, Employee, Manager
 from Food.models import Food
-import datetime
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView,DetailView,ListView, CreateView,DeleteView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from Cart.forms import CartAddFoodForm
 from Order.models import Order
+from Comment.forms import CommentForm
+from Comment.models import Comment
 
 class HomePageView(TemplateView):
 	template_name = 'home.html'
@@ -69,10 +71,14 @@ class StoreFoodDetailView(LoginRequiredMixin, DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['food'] = Food.objects.filter(store__id=self.kwargs['pk']).get(id=self.kwargs['food_id'])
+		food = Food.objects.filter(store__id=self.kwargs['pk']).get(id=self.kwargs['food_id'])
+		context['food'] = food
 		store = Store.objects.get(id=self.kwargs['pk'])
 		context['cart_food_form'] = CartAddFoodForm()
+		context['comment_form'] = CommentForm()
+		context['comments'] = Comment.objects.filter(food=food)[:5]
 		self.request.session['store_id'] = store.id
+
 		return context
 
 
