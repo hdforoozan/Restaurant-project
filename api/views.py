@@ -5,7 +5,9 @@ from Store.models import Store, Employee, Manager
 from django.contrib.auth import get_user_model
 from rest_framework.filters import SearchFilter
 from rest_framework.pagination import LimitOffsetPagination
-from .serializers import FoodSerializer, StoreSerializer, ManagerSerializer, UserSerializer
+from Coupon.models import Coupon
+from Order.models import Order
+from .serializers import FoodSerializer, StoreSerializer, ManagerSerializer, UserSerializer,CouponSerializer,OrderSerializer
 
 
 class Pagination(LimitOffsetPagination):
@@ -68,3 +70,30 @@ class UserListAPIView(generics.ListCreateAPIView):
 class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = get_user_model().objects.all()
 	serializer_class = UserSerializer
+
+# coupons api views
+class CouponListAPIView(generics.ListCreateAPIView):
+	queryset = Coupon.objects.all()
+	serializer_class = CouponSerializer
+	filter_backends = (DjangoFilterBackend,SearchFilter,)
+	filter_fields = ('code',)
+	search_fields = ('code','discount')
+	pagination_class = Pagination
+
+class CouponDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Coupon.objects.all()
+	serializer_class = CouponSerializer
+
+
+# orders api views
+class OrderListAPIView(generics.ListCreateAPIView):
+	queryset = Order.objects.all()
+	serializer_class = OrderSerializer
+	filter_backends = (DjangoFilterBackend,SearchFilter,)
+	filter_fields = ('name','address','city')
+	search_fields = ('address','store_id','discount','paid')
+	pagination_class = Pagination
+
+class OrderDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Order.objects.all()
+	serializer_class = OrderSerializer

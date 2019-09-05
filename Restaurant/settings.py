@@ -25,7 +25,7 @@ SECRET_KEY = '5+9i!3ds@#=lc2)@&o1#7(s51gzwz%u58mx=lz+ryqshh(^$24'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['HadiRestaurant.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'corsheaders',
     'sorl.thumbnail',
+    'social_django',
 ]
 
 REST_FRAMEWORK = {
@@ -73,6 +74,11 @@ REST_FRAMEWORK = {
     ],
 }
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+)
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1035870212437-1ech29qdlhu2se63pqk1vluurijkiq1g.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'vN9wFtnW1008xFnVXtS-uX3q'
 
 CORS_ORIGIN_WHITELIST = (
 'localhost:3000'
@@ -156,7 +162,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

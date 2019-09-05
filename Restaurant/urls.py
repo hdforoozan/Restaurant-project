@@ -35,4 +35,5 @@ urlpatterns = [
     path('api/v1/rest-auth/', include('rest_auth.urls')),
     #path('api/v1/socialaccounts/', include('allauth.urls')),
     path('api/v1/rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('social-auth/',include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

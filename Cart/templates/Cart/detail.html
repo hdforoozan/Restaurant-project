@@ -66,9 +66,9 @@
             {% csrf_token %}
           </form>
         </td>
-        <td class="num"><a class="btn btn-danger" href="{% url 'cart_remove' food.id %}">Remove</a></td>
-        <td class="num">${{ item.price }}</td>
-        <td class="num">${{ item.total_price }}</td>
+        <td><a class="btn btn-danger" href="{% url 'cart_remove' food.id %}">Remove</a></td>
+        <td>${{ item.price }}</td>
+        <td>${{ item.total_price }}</td>
       </tr>
       {% endwith %}
       {% endfor %}

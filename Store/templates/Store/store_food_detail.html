@@ -43,10 +43,12 @@
       	</form>
       </div>
       <div class="col-md-6">
-        <h4>Comments about {{ food.name }} :</h4>
+        <h4>Comments for {{ food.name }} :</h4>
         <br>
-        {% for comment in comments %}
-          <h5 style="color:#002db3; display:inline;">{{ comment.user.username }}</h5><p style='display:inline'> : {{ comment.comment }}</p>
+        {% for comment,comment_time in food_comments %}
+          <h5 style="color:#002db3; display:inline;">{{ comment.user.username }}</h5>
+          <p style='display:inline;'> : {{ comment.comment }}</p>
+          <b style='display:inline; color:#34cb34;'>{{ comment_time }}</b>
           <br>
         {% endfor %}
         <br>

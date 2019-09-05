@@ -7,6 +7,7 @@ from Food.models import Food
 from Store.models import Store
 
 
+
 @login_required
 @require_POST
 def submit_comment(request, store_id, food_id):

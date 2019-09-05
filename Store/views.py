@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from django.shortcuts import render
 from .models import Store, Employee, Manager
 from Food.models import Food
@@ -76,7 +76,41 @@ class StoreFoodDetailView(LoginRequiredMixin, DetailView):
 		store = Store.objects.get(id=self.kwargs['pk'])
 		context['cart_food_form'] = CartAddFoodForm()
 		context['comment_form'] = CommentForm()
-		context['comments'] = Comment.objects.filter(food=food)[:5]
+		comments = Comment.objects.filter(food=food)[:5]
+
+		comment_times = []
+		now = datetime.now()
+		date_format = "%Y-%m-%d  %H:%M:%S"
+		time1 = now.strftime("%Y-%m-%d  %H:%M:%S")
+		time_now = datetime.strptime(time1,date_format)
+		for comment in comments:
+			time2 = comment.created.strftime("%Y-%m-%d  %H:%M:%S")
+			time_2 = now.strptime(time2,date_format)
+			diff_time = time_now - time_2
+			if diff_time.days > 0:
+				weeks = diff_time.days / 7
+				months = diff_time.days / 30
+				if months > 0:
+					comment_times.append('{} months ago'.format(months))
+				else:
+					if weeks > 0:
+						comment_times.append('{} weeks ago'.format(weeks))
+					else:
+						comment_times.append('{} days ago'.format(diff_time.days))
+			else:
+				hours = int(diff_time.seconds / (3600))
+				if hours > 0:
+					comment_times.append('{} hours ago'.format(hours))
+				else:
+					minutes = int((diff_time.seconds % 3600) / 60)
+					if minutes > 0:
+						comment_times.append('{} minutes ago'.format(minutes))
+					else:
+						comment_times.append('just now')
+
+		food_comments = zip(comments,comment_times)
+		context['food_comments'] = food_comments
+
 		self.request.session['store_id'] = store.id
 
 		return context

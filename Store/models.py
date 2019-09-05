@@ -28,7 +28,7 @@ class Manager(models.Model):
 
 class Store(models.Model):
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
-	manager = models.OneToOneField(Manager,on_delete=models.CASCADE,null=True)
+	manager = models.OneToOneField(Manager,related_name='store_manager',on_delete=models.CASCADE,null=True)
 	foods = models.ManyToManyField(Food)
 	branch_num = models.PositiveIntegerField()
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
