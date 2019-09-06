@@ -18,18 +18,20 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from Store.views import HomePageView
+from Food.views import search_food
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('account/', include('Account.urls')),
     path('foods/', include('Food.urls')),
     path('stores/', include('Store.urls')),
-    path('account/', include('Account.urls')),
     path('cart/', include('Cart.urls')),
     path('coupons/', include('Coupon.urls')),
     path('comments/', include('Comment.urls')),
     path('orders/', include('Order.urls')),
     path('', HomePageView.as_view(), name='home'),
+    path('search/', search_food, name='search'),
     path('api/v1/', include('api.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/v1/rest-auth/', include('rest_auth.urls')),

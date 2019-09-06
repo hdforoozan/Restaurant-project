@@ -9,6 +9,7 @@ from Cart.forms import CartAddFoodForm
 from Order.models import Order
 from Comment.forms import CommentForm
 from Comment.models import Comment
+from Food.forms import SearchForm
 
 class HomePageView(TemplateView):
 	template_name = 'home.html'
@@ -17,6 +18,7 @@ class HomePageView(TemplateView):
 		context = super().get_context_data(**kwargs)
 		context['most_sell_foods'] = Food.objects.filter(name__icontains='p')
 		context['cheapest_foods'] = Food.objects.filter(price__lte=10)
+		context['search_form'] = SearchForm()
 		return context
 
 
@@ -35,7 +37,8 @@ class StoreDetailView(LoginRequiredMixin, DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['foods'] = Food.objects.filter(store__id=self.kwargs['pk']).filter(run_out=False)
+		store = Store.objects.get(id=self.kwargs['pk'])
+		context['foods'] = Food.objects.filter(stores=store).filter(run_out=False)
 		context['employees'] = Employee.objects.filter(store__id=self.kwargs['pk'])
 		paid_orders = Order.objects.filter(paid=True)
 		monthly_income = 0
@@ -71,9 +74,9 @@ class StoreFoodDetailView(LoginRequiredMixin, DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		food = Food.objects.filter(store__id=self.kwargs['pk']).get(id=self.kwargs['food_id'])
-		context['food'] = food
 		store = Store.objects.get(id=self.kwargs['pk'])
+		food = Food.objects.filter(stores=store).get(id=self.kwargs['food_id'])
+		context['food'] = food
 		context['cart_food_form'] = CartAddFoodForm()
 		context['comment_form'] = CommentForm()
 		comments = Comment.objects.filter(food=food)[:5]
@@ -88,8 +91,8 @@ class StoreFoodDetailView(LoginRequiredMixin, DetailView):
 			time_2 = now.strptime(time2,date_format)
 			diff_time = time_now - time_2
 			if diff_time.days > 0:
-				weeks = diff_time.days / 7
-				months = diff_time.days / 30
+				weeks = int(diff_time.days / 7)
+				months = int(diff_time.days / 30)
 				if months > 0:
 					comment_times.append('{} months ago'.format(months))
 				else:
@@ -150,6 +153,18 @@ class ManagerDeleteView(LoginRequiredMixin, DeleteView):
 class EmployeeDetailView(LoginRequiredMixin, DetailView):
 	model = Employee
 	context_object_name = 'employee'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		store_employees = Employee.objects.filter(store_id=self.kwargs['pk'])
+		employee = Employee.objects.get(id=self.kwargs['employee_id'])
+		if employee in store_employees:
+			context['employee'] = employee
+		else:
+			context['employee'] = None
+
+		return context
+
 
 
 

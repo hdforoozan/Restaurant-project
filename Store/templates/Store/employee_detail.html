@@ -14,35 +14,39 @@
 <main role="main">
   <div class="jumbotron">
     <div class="container">
-      <h1 class="display-3">{{ employee.name }}</h1>
+        {% if user.is_staff and user.is_superuser and employee %}
+          <h1 class="display-3">{{ employee.name }}</h1>
+        {% else %}
+          <h1 class="display-3">Page Not Found</h1>
+        {% endif %}
     </div>
   </div>
-
+  {% if user.is_staff and user.is_superuser and employee %}
   <div class="container">
     <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-5">
-        <h4>Education Degree : {{ employee.education_degree }}</h4>
+        <p>Education Degree : {{ employee.education_degree }}</p>
       </div>
       <div class="col-md-4">
-        <h4>Position : {{ employee.position }}</h4>
+        <p>Position : {{ employee.position }}</p>
       </div>
       <div class="col-md-3">
-        <h4>Salary : {{ employee.monthly_salary }}</h4>
+        <p>Salary : {{ employee.monthly_salary }}</p>
       </div>
     </div>
     <br>
     <div class="row">
       <div class="col-md-4">
-        <h4>Address : {{ employee.address }}</h4>
+        <p>Address : {{ employee.address }}</p>
         <br/>
       </div>
       <div class="col-md-4">
-        <h4>Created : {{ employee.pub_date }}</h4>
+        <p>Created : {{ employee.pub_date }}</p>
         <br/>
       </div>
       <div class="col-md-4">
-        <h4>Phone Number : {{ employee.phone_num }}</h4>
+        <p>Phone Number : {{ employee.phone_num }}</p>
         <br/>
       </div>
     </div>
@@ -50,7 +54,6 @@
       <div class="col-md-4">
         <img src="{{ employee.image.url }}" height="300" width="300">
       </div>
-    {% if user.is_staff and user.is_superuser %}
       <div class="col-md-1">
         <a href="{% url 'employee-update' employee.pk %}"><input class="btn btn-primary" type="button" value="Update"></a>
       </div>
@@ -58,8 +61,8 @@
         <a href="{% url 'employee-delete' employee.pk %}"><input class="btn btn-danger" type="button" value="Delete"></a>
       </div>
     </div>
-    {% endif %}
   </div> <!-- /container -->
+  {% endif %}
   <hr>
 {% endblock content %}
 

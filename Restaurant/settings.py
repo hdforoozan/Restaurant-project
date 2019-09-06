@@ -74,16 +74,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
-)
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1035870212437-1ech29qdlhu2se63pqk1vluurijkiq1g.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'vN9wFtnW1008xFnVXtS-uX3q'
-
-CORS_ORIGIN_WHITELIST = (
-'localhost:3000'
-)
-
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -110,6 +100,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -193,3 +185,17 @@ SITE_ID = 1
 # Session settings
 
 CART_SESSION_ID = 'cart'
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1035870212437-1ech29qdlhu2se63pqk1vluurijkiq1g.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'vN9wFtnW1008xFnVXtS-uX3q'
+
+CORS_ORIGIN_WHITELIST = (
+'localhost:3000'
+)

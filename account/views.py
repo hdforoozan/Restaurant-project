@@ -46,8 +46,11 @@ def dashboard(request):
 	email = request.user.email
 	if email is None:
 		email = 'blank'
-	profile = Profile.objects.get(user=request.user)
-
+	try:
+		profile = Profile.objects.get(user=request.user)
+	except Profile.DoesNotExist:
+		profile = None
+		
 	return render(request, 'account/dashboard.html', {
 	'username':username, 'email':email,'profile':profile,
 	})

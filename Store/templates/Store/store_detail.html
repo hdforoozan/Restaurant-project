@@ -37,7 +37,7 @@
             <p>{{ emp.name }}</p>
             {% if user.is_staff and user.is_superuser %}
               <div class="col-md-2">
-                <a href="{% url 'employee-detail' store_id=store.id pk=emp.id %}"><input class="btn btn-info" type="button" value="Detail &raquo;"></a>
+                <a href="{% url 'employee-detail' store.id emp.id %}"><input class="btn btn-info" type="button" value="Detail &raquo;"></a>
               </div>
               <br>
             {% endif %}
