@@ -61,6 +61,13 @@ class Cart(object):
         del self.session[settings.CART_SESSION_ID]
         self.save()
 
+    def check_empty(self):
+        if self.cart.values() is None:
+            self.cart['coupon_id'] = None
+            return True
+        return False
+
+
     def get_store_id(self):
         store_id = 0
         for item in self.cart.values():
