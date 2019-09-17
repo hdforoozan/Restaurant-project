@@ -25,7 +25,7 @@ SECRET_KEY = '5+9i!3ds@#=lc2)@&o1#7(s51gzwz%u58mx=lz+ryqshh(^$24'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hadirestaurant.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -86,15 +86,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_HSTS_PRELOAD = True
-SECURE_HSTS_SECONDS = 3600
-X_FRAME_OPTIONS = 'DENY'
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_HSTS_PRELOAD = True
+# SECURE_HSTS_SECONDS = 3600
+# X_FRAME_OPTIONS = 'DENY'
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_BROWSER_XSS_FILTER = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 ROOT_URLCONF = 'Restaurant.urls'
 
